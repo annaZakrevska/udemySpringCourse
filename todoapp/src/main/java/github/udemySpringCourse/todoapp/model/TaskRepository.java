@@ -17,6 +17,4 @@ public interface TaskRepository {
 
     boolean existsById(Integer id);
 
-    void delete(Task entity);
-
 }
