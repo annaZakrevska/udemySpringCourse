@@ -3,7 +3,7 @@
         enabled: true
         path: '/console'
    jpa.hibernate:
-        ddl-auto: create-drop
+        ddl-auto: validate
    datasource:
      url: 'jdbc:h2:file:./todo-db'
  task.template.allowMultipleTasks: false

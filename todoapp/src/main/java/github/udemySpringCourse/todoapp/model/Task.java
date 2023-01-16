@@ -9,12 +9,11 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "tasks")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotBlank(message = "Not Blank")
     private String description;
     private boolean done;
-
 
     public int getId() {
         return id;
