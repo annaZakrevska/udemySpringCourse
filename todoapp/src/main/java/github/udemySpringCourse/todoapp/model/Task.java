@@ -18,6 +18,10 @@ public class Task {
     @Embedded
     private Audit audit = new Audit();
 
+    public Task (String description, LocalDateTime deadline){
+        this.description = description;
+        this.deadline = deadline;
+    }
     public Audit getAudit() {
         return audit;
     }
