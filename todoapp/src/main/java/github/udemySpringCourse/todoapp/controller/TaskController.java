@@ -10,8 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
+import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.beans.Transient;
 import java.net.URI;
 import java.util.List;
 
@@ -43,7 +44,11 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
         toUpdate.setId(id);
-        repository.save(toUpdate);
+        repository.findById(id)
+                .ifPresent(task -> {
+                    task.updateFrom(toUpdate);
+                    repository.save(task);
+                });
         return ResponseEntity.noContent().build();
     }
 
@@ -57,6 +62,16 @@ public class TaskController {
     ResponseEntity<Task> createTask (@RequestBody @Valid Task toCreate){
         Task result = repository.save(toCreate);
        return ResponseEntity.created(URI.create("/"+result.getId())).body(result);
+    }
+    @Transactional
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<Task> toggleTask(@PathVariable int id){
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        repository.findById(id)
+                .ifPresent(task -> task.setDone((!task.isDone())));
+        return ResponseEntity.noContent().build();
     }
 
 }
