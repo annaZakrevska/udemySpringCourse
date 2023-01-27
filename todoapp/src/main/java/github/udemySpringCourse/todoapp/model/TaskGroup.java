@@ -25,21 +25,21 @@ public class TaskGroup {
         this.tasks = tasks;
     }
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "group")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Task> tasks;
     @ManyToOne
-    @JoinColumn(name="project_id")
-    private  Project project;
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public TaskGroup() {
 
     }
 
-     Project getProject() {
+    public Project getProject() {
         return project;
     }
 
-     void setProject(Project project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 
@@ -47,7 +47,7 @@ public class TaskGroup {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(int id) {
         this.id = id;
     }
 
